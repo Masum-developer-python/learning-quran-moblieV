@@ -24,9 +24,9 @@ function Cards({
   console.log(arabicAlphabet);
   return (
     <>
-      <div key={rowIndex} className="flex flex-wrap w-[100%] space-x-1 m-1 ">
+      <div key={rowIndex} className="flex flex-wrap w-[calc(100%-10px)] space-x-1 md:space-x-4 m-1 ">
         <div
-          className={`font-bangla flex  justify-center items-center text-center text-2xl relative left-6 w-[calc(100%-30px)] md:left-0 md:w-[100%] m-2 max-h-[40px] ${selectedColor.backgroundColor} ${selectedColor.textColor}`}
+          className={`font-bangla flex  justify-center items-center text-center text-2xl relative left-6 w-[calc(100%-30px)] md:left-0 md:w-[100%] m-2 max-h-[100px] ${selectedColor.backgroundColor} ${selectedColor.textColor}`}
         >
           <span className="text-3xl text-center">
             আরবী বর্ণমালা <span className="text-3xl">{title} </span>
@@ -51,7 +51,7 @@ function Cards({
           />
         </div>
       )}
-        <div className="flex flex-0 flex-wrap flex-row-reverse w-full m-auto md:m-2">
+        <div className="flex flex-0 flex-wrap flex-row-reverse w-full relative left-8 md:left-0 md:m-2 h-full">
           {arabicAlphabet
             .filter((row) => row.extra != 1)
             .map((item, itemIndex) => (

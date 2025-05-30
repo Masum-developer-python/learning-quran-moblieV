@@ -1,4 +1,4 @@
-console.log('ColorSelector.jsx');
+console.log("ColorSelector.jsx");
 
 import React from "react";
 
@@ -11,14 +11,20 @@ function ColorSelector({ selectedTheme, selectedColor, setSelectedColor }) {
   return (
     <>
       {/* <label className=" mb-2 font-semibold">Select Color Combination:</label> */}
-      <label className="font-bangla w-16 mb-2 font-small">Select Color : </label>
+      <label className="font-bangla w-16 mb-2 font-small">
+        Select Color :{" "}
+      </label>
       <select
         value={JSON.stringify(selectedColor)}
         onChange={handleColorChange}
-        className="font-bangla w-24 p-2 border rounded ${selectedColor.backgroundColor}"
+        className={`w-24 p-2 border-4 hover:border-green-300 rounded font-bangla ${selectedColor.textColor} ${selectedColor.backgroundColor}`}
       >
         {selectedTheme.combinations.map((combo, index) => (
-          <option key={index} className= {`${combo.textColor} ${combo.backgroundColor}`} value={JSON.stringify(combo)}>
+          <option
+            key={index}
+            className={`${combo.textColor} ${combo.backgroundColor}`}
+            value={JSON.stringify(combo)}
+          >
             {combo.description}
           </option>
         ))}

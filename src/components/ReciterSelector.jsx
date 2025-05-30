@@ -1,6 +1,6 @@
 import React from "react";
 
-function ReciterSelector({ selectedReciter, setSelectedReciter, reciterList }) {
+function ReciterSelector({ selectedReciter, setSelectedReciter, reciterList, selectedColor }) {
   const handleReciterChange = (e) => {
     const reciter = reciterList.find((r) => r.name === e.target.value);
     setSelectedReciter(reciter);
@@ -12,7 +12,7 @@ function ReciterSelector({ selectedReciter, setSelectedReciter, reciterList }) {
       <select
         value={selectedReciter.name}
         onChange={handleReciterChange}
-        className="w-24 p-2 border rounded font-bangla"
+        className={`w-24 p-2 border-4 hover:border-green-300 rounded font-bangla ${selectedColor.textColor} ${selectedColor.backgroundColor}`}
       >
         {reciterList.map((reciter) => (
           <option key={reciter.name} value={reciter.name}>

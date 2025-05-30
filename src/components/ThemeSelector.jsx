@@ -15,7 +15,7 @@ function ThemeSelector({ selectedTheme, setSelectedTheme, alphabetColorCombinati
       <select
         value={selectedTheme.theme}
         onChange={handleThemeChange}
-        className={`w-24 p-2 border rounded font-bangla ${selectedColor.textColor}`}
+        className={`w-24 p-2 border-4 hover:border-green-300 rounded font-bangla ${selectedColor.textColor} ${selectedColor.backgroundColor}`}
       >
         {alphabetColorCombinations.map((theme) => (
           <option key={theme.theme} value={theme.theme}>

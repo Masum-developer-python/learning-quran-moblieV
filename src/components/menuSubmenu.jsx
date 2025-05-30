@@ -199,6 +199,7 @@ function Submenu({
           selectedReciter={selectedReciter}
           setSelectedReciter={setSelectedReciter}
           reciterList={reciterList}
+          selectedColor={selectedColor}
         />
         <br />
         <br />

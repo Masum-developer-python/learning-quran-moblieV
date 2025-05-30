@@ -21,7 +21,7 @@ function App() {
   console.log(arabicDiacritics.Harakat.diacritics[0].pages[0].column);
   const [arabicAlphabet, setArabicAlphabet] = useState([]);
 
-  let rootAddress = localStorage.getItem('rootAddress');
+  let rootAddress = localStorage.getItem("rootAddress");
   console.log(rootAddress);
   useEffect(() => {
     async function fetchData() {
@@ -92,7 +92,7 @@ function App() {
 
   return (
     <>
-      <div className="flex w-full">
+      <div className="flex w-[calc(100%-50px)] m-auto">
         <Nav
           selectedColor={selectedColor}
           selectedTheme={selectedTheme}
@@ -104,7 +104,7 @@ function App() {
           reciterList={reciterList}
         />
         <Router>
-          <main className="flex-1 flex max-w-">
+          <main className="flex-1 flex max-w-[100%]">
             <Routes>
               <Route path="/home" element={<Home />} />
               <Route path="/login" element={<Login />} />
@@ -179,7 +179,7 @@ function App() {
                             route.name.toLowerCase() === "saakinah"
                           }
                           isSaddah={route.name.toLowerCase() === "ashshaddah"}
-                          audioFolder = {`/${category.toLowerCase()}/${route.name.toLowerCase()}`}
+                          audioFolder={`/${category.toLowerCase()}/${route.name.toLowerCase()}`}
                         />
                       }
                     />
