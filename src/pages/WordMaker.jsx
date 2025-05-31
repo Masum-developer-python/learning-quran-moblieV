@@ -6,7 +6,8 @@ function Words({
   width = "100px",
   sendingWord,
   setSendingWord,
-  arabicAlphabet
+  arabicAlphabet,
+  children
 }) {
   const [word, setWord] = useState("");
   console.log("Words.jsx");

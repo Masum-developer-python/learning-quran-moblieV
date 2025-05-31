@@ -27,22 +27,10 @@ const Table = ({
     fetchData();
   }, []);
   console.log(arabicWords);
-
-  // const address1 =
-  //   rootAddress + "quran-words/filter_by_arabic_words";
-  // const [quranWords, setQuranWords] = useState([]);
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const data = await receiveDataFromDjango(address1);
-  //     setQuranWords(data); // ✅ Update state with fetched data
-  //   }
-  //   fetchData();
-  // }, []);
-  // console.log(quranWords);
-  console.log(selectedColor);
+  // console.log(selectedColor);
   console.log(method);
-  console.log(page.column);
-  page.column.map((position, index) => console.log(index));
+  // console.log(page.column);
+  // page.column.map((position, index) => console.log(index));
   return (
     <div
       className={`container mx-auto p-4 ${selectedColor.backgroundColor} ${selectedColor.textColor}`}

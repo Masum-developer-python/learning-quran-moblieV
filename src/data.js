@@ -201,6 +201,54 @@ export const arabicDiacritics = {
     ],
   },
 
+  others: {
+    title: "সাকিন & তাশদীদ",
+    diacritics: [
+      {
+        name: "Saakinah",
+        title: "সাকিন",
+        symbol: "\u0652", // ـْ
+        unicode: "U+0652",
+        description: "No vowel (silent letter)",
+        pages: [
+          {
+            name: "Words",
+            title: "সাকিনযুক্ত শব্দ",
+            column: ["শেষে", "মধ্যে", "শুরুতে"],
+            columnEn : ['end', 'middle', 'start'],
+          },
+        ],
+      },
+      {
+        name: "AshShaddah",
+        title: "তাশদীদ",
+        symbol: "\u0651", // ـّ
+        unicode: "U+0651",
+        description: "Indicates doubling (gemination)",
+        pages: [
+          {
+            name: "Words_harakat",
+            title: "তাশদীদ এবং হারকাত যুক্ত শব্দ",
+            column: ["দ্বাম্মাহ এর সাথে", "কাসরাহ এর সাথে", "ফাতহাহ এর সাথে"],
+            columnEn : ['end', 'middle', 'start'],
+          },
+          {
+            name: "Words_tanween",
+            title: "তাশদীদ এবং তানভীন যুক্ত শব্দ",
+            column: ["দ্বাম্মাহ তানভীনের সাথে", "কাসরাহ তানভীনের সাথে", "ফাতহাহ তানভীনের সাথে"],
+            columnEn : ['end', 'middle', 'start'],
+          },
+          {
+            name: "Words_madd",
+            title: "তাশদীদ এবং মাদ্দ যুক্ত শব্দ",
+            column: ["ওয়াও মাদ্দ এর সাথে", "ইয়া মাদ্দ এর সাথে", "আলিফ মাদ্দ এর সাথে"],
+            columnEn : ['end', 'middle', 'start'],
+          },
+        ],
+      },
+    ],
+  },
+
   Tanween: {
     title: "তানভীন",
     diacritics: [
@@ -302,53 +350,6 @@ export const arabicDiacritics = {
     ],
   },
 
-  others: {
-    title: "সাকিন & তাশদীদ",
-    diacritics: [
-      {
-        name: "Saakinah",
-        title: "সাকিন",
-        symbol: "\u0652", // ـْ
-        unicode: "U+0652",
-        description: "No vowel (silent letter)",
-        pages: [
-          {
-            name: "Words",
-            title: "সাকিনযুক্ত শব্দ",
-            column: ["শেষে", "মধ্যে", "শুরুতে"],
-            columnEn : ['end', 'middle', 'start'],
-          },
-        ],
-      },
-      {
-        name: "AshShaddah",
-        title: "তাশদীদ",
-        symbol: "\u0651", // ـّ
-        unicode: "U+0651",
-        description: "Indicates doubling (gemination)",
-        pages: [
-          {
-            name: "Words_harakat",
-            title: "তাশদীদ এবং হারকাত যুক্ত শব্দ",
-            column: ["দ্বাম্মাহ এর সাথে", "কাসরাহ এর সাথে", "ফাতহাহ এর সাথে"],
-            columnEn : ['end', 'middle', 'start'],
-          },
-          {
-            name: "Words_tanween",
-            title: "তাশদীদ এবং তানভীন যুক্ত শব্দ",
-            column: ["দ্বাম্মাহ তানভীনের সাথে", "কাসরাহ তানভীনের সাথে", "ফাতহাহ তানভীনের সাথে"],
-            columnEn : ['end', 'middle', 'start'],
-          },
-          {
-            name: "Words_madd",
-            title: "তাশদীদ এবং মাদ্দ যুক্ত শব্দ",
-            column: ["ওয়াও মাদ্দ এর সাথে", "ইয়া মাদ্দ এর সাথে", "আলিফ মাদ্দ এর সাথে"],
-            columnEn : ['end', 'middle', 'start'],
-          },
-        ],
-      },
-    ],
-  },
 };
 
 

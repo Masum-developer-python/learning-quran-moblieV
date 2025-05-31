@@ -148,7 +148,7 @@ export default function QuranRead({ selectedColor }) {
       <div className="md:w-[100%]  flex flex-col gap-16 mt-8">
         {refData[0] && (
           <div className=" w-[98%]">
-            <RefTable refData={refData}></RefTable>
+            <RefTable refData={refData} word={word}></RefTable>
           </div>
         )}
         {!error && data && (

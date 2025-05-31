@@ -7,11 +7,11 @@ import {
   Save,
   CirclePlay,
   SquareX,
-  BookOpenText,
 } from "lucide-react";
 import { sendDataToDjango, receiveDataFromDjango } from "../data";
 import Words from "../pages/WordMaker";
 import RefTable from "./RefTable";
+import axios from "axios";
 import { fileLocation } from "../data";
 export default function ActionBar({
   diacritics,
@@ -27,19 +27,22 @@ export default function ActionBar({
 }) {
   // console.log(diacritics, position, id, pName);
   let rootAddress = localStorage.getItem("rootAddress");
+  let bangla='';
   const baseAddress = rootAddress + "arabic-words/";
   const [address, setAddress] = useState(baseAddress);
   const [method, setMethod] = useState("POST");
   const user = localStorage.getItem("user");
   const isAdmin = user == null ? false : true;
   const [refData, setRefData] = useState([]);
+  const [visible, setVisible] = useState({});
   const accessToken = localStorage.getItem("access_token");
+  const refreshToken = localStorage.getItem("refresh_token");
   const reciter = localStorage
     .getItem("arabic-app-reciter")
     .split(",")[1]
     .split(":")[1]
     .slice(1, -2);
-  console.log(reciter);
+  // console.log(reciter);
 
   return (
     <>
@@ -53,7 +56,31 @@ export default function ActionBar({
                 <button
                   title="Delete"
                   className="w-8 h-8 flex-1 flex items-center justify-center bg-gray-100 rounded-lg hover:bg-red-200"
-                  onClick={() => {
+                  onClick={async () => {
+
+                    try {
+                      const refreshResponse = await axios.post(
+                        rootAddress + "token/refresh/",
+                        { refresh: refreshToken },
+                        {
+                          headers: { "Content-Type": "application/json" },
+                          withCredentials: true,
+                        }
+                      );
+                  
+                      if (refreshResponse.status === 200) {
+                        const newAccessToken = refreshResponse.data.access;
+                        const newRefreshToken = refreshResponse.data.refresh;
+                  
+                        localStorage.setItem("access_token", newAccessToken);
+                        localStorage.setItem("refresh_token", newRefreshToken);
+                      }
+                    } catch (error) {
+                      console.error("🔒 Token refresh failed:", error);
+                      alert("Session expired. Please log in again.");
+                      // Optionally redirect to login
+                      return;
+                    }
                     setMethod("DELETE");
                     console.log(address, method);
                     sendDataToDjango(
@@ -71,10 +98,39 @@ export default function ActionBar({
                 <button
                   title="Edit"
                   className="w-8 h-8 flex-1 flex items-center justify-center bg-gray-100 rounded-lg hover:bg-blue-200"
-                  onClick={() => {
-                    document
-                      .getElementById(position + id)
-                      .classList.toggle("hidden");
+                  onClick={ async () => {
+
+                    try {
+                      const refreshResponse = await axios.post(
+                        rootAddress + "token/refresh/",
+                        { refresh: refreshToken },
+                        {
+                          headers: { "Content-Type": "application/json" },
+                          withCredentials: true,
+                        }
+                      );
+                  
+                      if (refreshResponse.status === 200) {
+                        const newAccessToken = refreshResponse.data.access;
+                        const newRefreshToken = refreshResponse.data.refresh;
+                  
+                        localStorage.setItem("access_token", newAccessToken);
+                        localStorage.setItem("refresh_token", newRefreshToken);
+                      }
+                    } catch (error) {
+                      console.error("🔒 Token refresh failed:", error);
+                      alert("Session expired. Please log in again.");
+                      // Optionally redirect to login
+                      return;
+                    }
+
+
+                    const key = position + id;
+                    setSendingWord(word);
+                    setVisible((prev) => ({
+                      ...prev,
+                      [key]: !prev[key],
+                    }));
                     setAddress(baseAddress + cellId + "/");
                     setMethod("PATCH");
                     console.log(
@@ -95,10 +151,36 @@ export default function ActionBar({
                 <button
                   title="Insert word"
                   className="w-8 h-8 flex-1 flex items-center justify-center bg-gray-100 rounded-lg hover:bg-yellow-200"
-                  onClick={() => {
-                    document
-                      .getElementById(position + id)
-                      .classList.toggle("hidden");
+                  onClick={async () => {
+
+                    try {
+                      const refreshResponse = await axios.post(
+                        rootAddress + "token/refresh/",
+                        { refresh: refreshToken },
+                        {
+                          headers: { "Content-Type": "application/json" },
+                          withCredentials: true,
+                        }
+                      );
+                  
+                      if (refreshResponse.status === 200) {
+                        const newAccessToken = refreshResponse.data.access;
+                        const newRefreshToken = refreshResponse.data.refresh;
+                  
+                        localStorage.setItem("access_token", newAccessToken);
+                        localStorage.setItem("refresh_token", newRefreshToken);
+                      }
+                    } catch (error) {
+                      console.error("🔒 Token refresh failed:", error);
+                      alert("Session expired. Please log in again.");
+                      // Optionally redirect to login
+                      return;
+                    }
+                    const key = position + id;
+                    setVisible((prev) => ({
+                      ...prev,
+                      [key]: !prev[key],
+                    }));
                     setMethod("POST");
                     // address = baseAddress + "/" + String(id);
                     console.log(method);
@@ -158,7 +240,10 @@ export default function ActionBar({
           >
             <SquareX className="w-7 h-7 text-red-900"></SquareX>
           </button>
-          <div className=""> <RefTable refData={refData} /></div>
+          <div className="">
+            {" "}
+            <RefTable refData={refData} word={word}/>
+          </div>
         </div>
         {/* ref ayah show */}
 
@@ -174,7 +259,11 @@ export default function ActionBar({
                 rootAddress + "quran-words/filter_by_word/?word=" + word
               );
               console.log(ref[0]);
-              document.getElementById(position + id + "Audio").src = fileLocation+"audios/sura" + ref[0].audio.substring(0, 4) + ref[0].audio;
+              document.getElementById(position + id + "Audio").src =
+                fileLocation +
+                "audios/sura" +
+                ref[0].audio.substring(0, 4) +
+                ref[0].audio;
               document.getElementById(position + id + "Audio").play();
               document.getElementById(position + id + "Audio").classList =
                 "hidden";
@@ -192,7 +281,8 @@ export default function ActionBar({
         {/* ------------------------------------------------------------------------------------------------------------------- */}
       </div>
       {/* word maker */}
-      <div id={`${position}${id}`} className="hidden bg-gray-100 relative">
+      
+      { visible[`${position}${id}`] && (<div id={`${position}${id}`} className="bg-gray-100 relative">
         <Words
           selectedColor={selectedColor}
           sendingWord={sendingWord}
@@ -207,7 +297,7 @@ export default function ActionBar({
                 diacritics: diacritics,
                 position: position,
                 word: sendingWord,
-                bangla: "",
+                bangla: bangla,
                 english: "",
                 parts_of_speech: "",
                 letter: id,
@@ -221,7 +311,13 @@ export default function ActionBar({
         >
           <Save className="w-8 h-8 text-blue-500" />
         </button>
-      </div>
+        <input type="text" placeholder="bang" className="h-16 w-48 text-sm"
+        onChange={(e)=>{
+          bangla = e.target.value;
+          console.log(bangla);
+        }}
+        ></input>
+      </div>)}
     </>
   );
 }

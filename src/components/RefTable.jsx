@@ -4,7 +4,7 @@ import { receiveDataFromDjango } from "../data";
 import Audio from "./Audio";
 import AyahWord from "./AyahWord";
 import { fileLocation } from "../data";
-export default function RefTable({ refData }) {
+export default function RefTable({ refData, word }) {
   const reciter = localStorage
     .getItem("arabic-app-reciter")
     .split(",")[1]
@@ -12,7 +12,8 @@ export default function RefTable({ refData }) {
     .slice(1, -2);
   const rootAddress = localStorage.getItem("rootAddress");
   const [ayah, setAyah] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState({});
+  // console.log(visible);
   // console.log(ayah);
   return (
     <div id="refTable" className="w-[99%]">
@@ -63,7 +64,62 @@ export default function RefTable({ refData }) {
                   className="border-2 border-gray-500 text-lg md:text-5xl font-akber"
                   dir="rtl"
                 >
-                  {item.text}
+                  {/* {item.text}{" "}
+                  {(() => {
+                    const text = item.text;
+                    const match = word;
+                    const startIndex = text.indexOf(match);
+
+                    if (startIndex === -1) return <span>{text}</span>;
+
+                    const before = text.slice(0, startIndex);
+                    const matched = text.slice(
+                      startIndex,
+                      startIndex + match.length
+                    );
+                    const after = text.slice(startIndex + match.length);
+
+                    return (
+                      <span>
+                        {before}
+                        <span className="text-green-500">{matched}</span>
+                        {after}
+                      </span>
+                    );
+                  })()} */}
+
+                  {" "}
+                  {(() => {
+                    const text = item.text;
+                    const search = word;
+                    const highlightIndexes = [];
+
+                    let tIndex = 0;
+                    for (let sIndex = 0; sIndex < search.length; sIndex++) {
+                      const char = search[sIndex];
+                      while (tIndex < text.length && text[tIndex] !== char) {
+                        tIndex++;
+                      }
+                      if (tIndex < text.length) {
+                        highlightIndexes.push(tIndex);
+                        tIndex++;
+                      }
+                    }
+
+                    return (
+                      <span>
+                        {text.split("").map((char, index) =>
+                          highlightIndexes.includes(index) ? (
+                            <span key={index} className="text-green-500">
+                              {char}
+                            </span>
+                          ) : (
+                            <span key={index}>{char}</span>
+                          )
+                        )}
+                      </span>
+                    );
+                  })()}
                 </td>
                 <td className="border-2 border-gray-500 ">
                   {/* every word audio */}
@@ -114,7 +170,6 @@ export default function RefTable({ refData }) {
                     onClick={async () => {
                       const key = `${item.sura}-${item.aya}-${item.position}`;
                       try {
-                        setLoading(true);
                         const refAyah = await receiveDataFromDjango(
                           rootAddress +
                             "quran-words/filter_by_sura?sura=" +
@@ -131,7 +186,10 @@ export default function RefTable({ refData }) {
                       } catch (error) {
                         console.error("❌ Error fetching data:", error);
                       } finally {
-                        setLoading(false);
+                        setVisible((prev) => ({
+                          ...prev,
+                          [key]: !prev[key],
+                        }));
                       }
                     }}
                   >
@@ -144,14 +202,15 @@ export default function RefTable({ refData }) {
                   id={`${item.sura}-${item.aya}-${item.position}`}
                   className="hidden md:table-cell border-2 border-gray-500 p-2 text-5xl font-akber"
                 >
-                  {ayah[`${item.sura}-${item.aya}-${item.position}`] && (
-                    <AyahWord
-                      data={ayah[`${item.sura}-${item.aya}-${item.position}`]}
-                      suraAudio={false}
-                      ayaAudio={false}
-                      word={item.text}
-                    ></AyahWord>
-                  )}
+                  {visible[`${item.sura}-${item.aya}-${item.position}`] &&
+                    ayah[`${item.sura}-${item.aya}-${item.position}`] && (
+                      <AyahWord
+                        data={ayah[`${item.sura}-${item.aya}-${item.position}`]}
+                        suraAudio={false}
+                        ayaAudio={false}
+                        word={item.text}
+                      ></AyahWord>
+                    )}
                 </td>
               </tr>
               <tr className=" md:hidden">
@@ -164,24 +223,21 @@ export default function RefTable({ refData }) {
                   className=" border-2 border-gray-500 p-2 text-5xl font-akber"
                   colSpan={8}
                 >
-                  {ayah[`${item.sura}-${item.aya}-${item.position}`] && (
-                    <AyahWord
-                      data={ayah[`${item.sura}-${item.aya}-${item.position}`]}
-                      suraAudio={false}
-                      ayaAudio={false}
-                      word={item.text}
-                    ></AyahWord>
-                  )}
+                  {visible[`${item.sura}-${item.aya}-${item.position}`] &&
+                    ayah[`${item.sura}-${item.aya}-${item.position}`] && (
+                      <AyahWord
+                        data={ayah[`${item.sura}-${item.aya}-${item.position}`]}
+                        suraAudio={false}
+                        ayaAudio={false}
+                        word={item.text}
+                      ></AyahWord>
+                    )}
                 </td>
               </tr>
             </>
           ))}
         </tbody>
       </table>
-      <audio controls id={`Audio`} className="hidden">
-        <source src="" type="audio/mpeg" />
-        The Word can't be found in Quran words database.
-      </audio>
     </div>
   );
 }
