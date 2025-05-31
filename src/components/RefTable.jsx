@@ -21,32 +21,32 @@ export default function RefTable({ refData, word }) {
         <thead>
           <tr className="md:sticky md:top-2 bg-green-100">
             <th className="hidden md:table-cell border-2 font-bangla border-gray-500">
-              {" "}
-              ক্রমিক{" "}
+              &nbsp;&nbsp;ক্রমিক&nbsp;&nbsp;
             </th>
-            <th className="border-2 font-bangla border-gray-500"> সুরা </th>
-            <th className="border-2 font-bangla border-gray-500"> আয়াত </th>
-            <th className="border-2 font-bangla border-gray-500"> স্থান </th>
-            <th className="border-2 font-bangla border-gray-500"> শব্দ </th>
+            <th className="border-2 font-bangla border-gray-500"> &nbsp;&nbsp;সুরা&nbsp;&nbsp;</th>
+            <th className="border-2 font-bangla border-gray-500"> &nbsp;&nbsp;আয়াত&nbsp;&nbsp;</th>
+            <th className="border-2 font-bangla border-gray-500"> &nbsp;&nbsp;স্থান&nbsp;&nbsp;</th>
+            <th className="border-2 font-bangla border-gray-500"> &nbsp;&nbsp;শব্দ&nbsp;&nbsp;</th>
             <th className="border-2 font-bangla border-gray-500">
-              {" "}
-              শব্দ অডিও{" "}
+              
+            &nbsp;&nbsp;শব্দ&nbsp;&nbsp;
+            &nbsp;&nbsp;অডিও&nbsp;&nbsp;
             </th>
 
             <th className="border-2 font-bangla border-gray-500">
-              {" "}
-              আয়াত অডিও{" "}
+              
+            &nbsp;&nbsp;আয়াত&nbsp;&nbsp;
+            &nbsp;&nbsp;অডিও&nbsp;&nbsp;
             </th>
             <th className="border-2 font-bangla border-gray-500">
-              {" "}
-              সুরাহ অডিও{" "}
+            &nbsp;&nbsp;সুরাহ&nbsp;&nbsp;
+            &nbsp;&nbsp;অডিও&nbsp;&nbsp;
             </th>
             <th className="border-2 font-bangla border-gray-500">
-              {" "}
-              রেফারেন্স{" "}
+            &nbsp;&nbsp;রেফারেন্স&nbsp;&nbsp;
             </th>
             <th className="hidden md:table-cell border-2 font-bangla border-gray-500">
-              পূর্ণাঙ্গ আয়াত
+            &nbsp;&nbsp;পূর্ণাঙ্গ আয়াত&nbsp;&nbsp;
             </th>
           </tr>
         </thead>
@@ -200,7 +200,7 @@ export default function RefTable({ refData, word }) {
                 <td
                   dir="rtl"
                   id={`${item.sura}-${item.aya}-${item.position}`}
-                  className="hidden md:table-cell border-2 border-gray-500 p-2 text-5xl font-akber"
+                  className="hidden md:table-cell border-2 border-gray-500 w-[55%] p-2 text-5xl font-akber"
                 >
                   {visible[`${item.sura}-${item.aya}-${item.position}`] &&
                     ayah[`${item.sura}-${item.aya}-${item.position}`] && (
