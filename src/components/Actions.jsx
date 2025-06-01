@@ -228,7 +228,7 @@ export default function ActionBar({
 
         <div
           id={`${position}${id}ID`}
-          className={`hidden fixed overflow-y-scroll h-[400px] w-[90%] md:max-w-[80%]  left-4 md:left-64 top-8 z-5 ${selectedColor.textColor} ${selectedColor.backgroundColor}`}
+          className={`hidden fixed overflow-y-scroll h-[calc(90%-10px)] w-[90%] md:max-w-[80%]  left-4 md:left-64 top-8 z-5 ${selectedColor.textColor} ${selectedColor.backgroundColor}`}
         >
           <button
             className="w-8 h-8 z-20 fixed bg-gray-100 rounded-lg hover:bg-red-200"

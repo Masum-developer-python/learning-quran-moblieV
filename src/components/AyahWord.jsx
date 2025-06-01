@@ -32,9 +32,9 @@ export default function AyahWord({
         <Audio
           title="Surah Audio"
           folder={`${fileLocation}audios/sura/${String(data[0].sura).padStart(
-                        3,
-                        "0"
-                      )}/${reciter}/`}
+            3,
+            "0"
+          )}/${reciter}/`}
           fileName={String(data[0].sura).padStart(3, "0") + ".mp3"}
         >
           {/* <strong className="text-3xl">সুরাহ অডিও</strong> */}
@@ -57,14 +57,16 @@ export default function AyahWord({
         {data[0] &&
           data.map((i) => (
             <>
+              {/* যদি শব্দ থাকে  */}
               {i.text ? (
                 <Audio
-                  title={i.text}
+                  title={i.translation}
                   folder={`${fileLocation}audios/sura`}
                   fileName={
                     i.audio != null ? i.audio.substring(0, 4) + i.audio : ""
                   }
                 >
+                  {/* যদি শব্দ ম্যাচিং হয় বোল্ড হবে */}
                   {i.audio ? (
                     i.text === word ? (
                       <strong>
@@ -86,7 +88,7 @@ export default function AyahWord({
                   title={`${i.aya}-Ayah Audio`}
                   folder={
                     fileLocation +
-                      "audios/sura/" +
+                    "audios/sura/" +
                     String(i.sura).padStart(3, "0") +
                     "/" +
                     reciter +
@@ -99,8 +101,14 @@ export default function AyahWord({
                   }
                 />
               ) : (
-                "۞"
-              )}
+                <>۞
+                <br/>
+                <span className="font-bangla text-sm">
+                {i.translation_bn}
+                </span>
+                </>
+              )}{" "}
+              {/* যদি আয়াত শেষে অডিও শুনতে চায় তাহলে অডিও বাটন আর না হয় ৮কোনা*/}
             </>
           ))}
       </div>

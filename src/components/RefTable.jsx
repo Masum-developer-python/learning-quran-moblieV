@@ -225,12 +225,17 @@ export default function RefTable({ refData, word }) {
                 >
                   {visible[`${item.sura}-${item.aya}-${item.position}`] &&
                     ayah[`${item.sura}-${item.aya}-${item.position}`] && (
+                      <>
                       <AyahWord
                         data={ayah[`${item.sura}-${item.aya}-${item.position}`]}
                         suraAudio={false}
                         ayaAudio={false}
                         word={item.text}
                       ></AyahWord>
+                      <>
+                      {}
+                      </>
+                      </>
                     )}
                 </td>
               </tr>
